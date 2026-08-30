@@ -31,5 +31,13 @@ def count_lines(name: str) -> str:
         return f"no such file: {name}"
     return str(len(p.read_text().splitlines()))
 
+@mcp.tool()
+def write_file(name: str, content: str) -> str:
+    """Write text content to a file in the agent directory (creates the file
+    or overwrites it if it already exists)"""
+    p = _safe(name)
+    p.write_text(content)
+    return f"wrote {len(content)} chars to {name}"
+
 if __name__ == "__main__":
     mcp.run(transport="stdio")
