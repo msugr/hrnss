@@ -13,6 +13,7 @@ def _safe(name: str) -> Path:
 @mcp.tool()
 def list_files(pattern: str = "*") -> str:
     """List files in the agent directory matching a glob pattern"""
+    _safe(pattern)
     return "\n".join(sorted(p.name for p in ROOT.glob(pattern))) or "(none)"
 
 @mcp.tool()
